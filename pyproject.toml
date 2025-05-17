@@ -1,0 +1,23 @@
+[project]
+name = "comet"
+version = "0.1.0"
+description = "AI-powered Discord bot"
+readme = "README.md"
+requires-python = ">=3.12, <3.13"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "anthropic>=0.51.0",
+    "discord>=2.3.2",
+    "openai>=1.79.0",
+    "python-dotenv>=1.1.0",
+    "pytz>=2025.2",
+    "pyyaml>=6.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.11.10",
+    "types-pytz>=2025.2.0.20250516",
+    "types-pyyaml>=6.0.12.20250516",
+]

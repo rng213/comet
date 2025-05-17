@@ -1,0 +1,30 @@
+# Database
+*.db
+
+# Docs
+docs/dev/
+
+# Environment
+.env
+
+# Logs
+logs/
+*.log
+
+# macOS-specific files
+.DS_Store
+
+# mypy
+.mypy_cache/
+
+# Python-generated files
+__pycache__/
+
+# ruff
+.ruff_cache/
+
+# Virtual environments
+.venv
+
+# yaml
+.prompt.yml

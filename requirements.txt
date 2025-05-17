@@ -1,0 +1,7 @@
+aiosqlite
+anthropic
+discord
+openai
+pytnon-dotenv
+pytz
+pyyaml

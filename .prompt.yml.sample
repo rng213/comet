@@ -1,0 +1,16 @@
+# DO NOT EXPOSE THIS FILE PUBLICLY AFTER FILLING IN VALUES!!
+#
+# This file is a sample for the .prompt.yml file.
+# Replace the placeholder values with actual values.
+
+# For `/chat` command
+chat_system: |
+  You are a helpful assistant that strictly follows the [System Instructions].
+
+  # [System Instructions]
+
+  Detail instructions...
+
+# For `/fixpy` command
+fixpy_system: |
+  You are a helpful assistant.

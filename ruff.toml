@@ -1,0 +1,50 @@
+# File patterns to include in linting.
+include = ["*.py"]
+
+# File patterns to exclude from linting and formatting.
+exclude = [".git", ".mypy_cache", ".ruff_cache", ".venv"]
+
+# The number of spaces per indentation level.
+indent-width = 4
+
+# Following PEP8 guidelines and with the team's agreement,
+# set the code line length to 99 characters.
+line-length = 99
+
+[format]
+# Disable automatic formatting for code blocks inside docstrings.
+docstring-code-format = false
+
+# Respect Brack, disallow tabs.
+indent-style = "space"
+
+# Prefer double quotes over single quotes.
+quote-style = "double"
+
+# Enforce trailing comma.
+skip-magic-trailing-comma = false
+
+[lint]
+# Enable all linting rules.
+select = ["ALL"]
+
+# Disable specific linting rules.
+ignore = [
+    "D100",   # Allow missing docstrings in public modules.
+    "D104",   # Allow missing docstrings in public packages.
+    "D107",   # Allow missing docstrings in __init__ methods.
+    "D203",   # Ignored in favor of D211 to enforce no blank line before class.
+    "D213",   # Ignored in favor of D212 to allow a blank line after the summary in multi-line docstrings.
+    "D413",   # Allow missing blank lines after the last section of a multiline docstring.
+    "F403",   # Allow wildcard imports for flexibility in certain contexts.
+    "PGH003", # Allow `type: ignore`.
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+unfixable = [
+    # For debugging purposes only, you may use print statements.
+    "T201", # Prevents auto-fixing print statements.
+    "T203", # Prevents auto-fixing pprint statements.
+]
