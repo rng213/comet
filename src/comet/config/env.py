@@ -35,9 +35,13 @@ GPT_DEFAULT_MAX_TOKENS: int = int(os.environ["GPT_DEFAULT_MAX_TOKENS"])
 GPT_DEFAULT_TEMPERATURE: float = float(os.environ["GPT_DEFAULT_TEMPERATURE"])
 GPT_DEFAULT_TOP_P: float = float(os.environ["GPT_DEFAULT_TOP_P"])
 
-# Models
+# Each Command
 CHAT_MODEL: str = os.environ["CHAT_MODEL"]
+
+# '/fixpy' command
 FIXPY_MODEL: str = os.environ["FIXPY_MODEL"]
+FIXPY_TEMPERATURE: float = float(os.environ["FIXPY_TEMPERATURE"])
+FIXPY_TOP_P: float = float(os.environ["FIXPY_TOP_P"])
 
 
 def _get_model_choices(env_var: str) -> list[app_commands.Choice[int]]:

@@ -11,9 +11,9 @@ from src.comet.ai.models.storage import ModelParamsStore
 from src.comet.ai.services.completion import generate_anthropic_response
 from src.comet.config.env import (
     CLAUDE_DEFAULT_MAX_TOKENS,
-    CLAUDE_DEFAULT_TEMPERATURE,
-    CLAUDE_DEFAULT_TOP_P,
     FIXPY_MODEL,
+    FIXPY_TEMPERATURE,
+    FIXPY_TOP_P,
 )
 from src.comet.config.yml import FIXPY_SYSTEM
 from src.comet.db.dao.access_privilege_dao import AccessPrivilegeDAO
@@ -31,16 +31,8 @@ class CodeModal(Modal):
 
     code_input: TextInput
 
-    def __init__(self, temperature: float, top_p: float) -> None:
-        """Initialize the code modal with AI parameters.
-
-        Parameters
-        ----------
-        temperature : float
-            The temperature parameter for Claude.
-        top_p : float
-            The top_p parameter for Claude.
-        """
+    def __init__(self) -> None:
+        """Initialize the code modal with AI parameters."""
         super().__init__(title="Fix Python Code")
 
         self.code_input = TextInput(
@@ -50,10 +42,6 @@ class CodeModal(Modal):
             required=True,
         )
         self.add_item(self.code_input)
-
-        # Save parameters
-        self.temperature = temperature
-        self.top_p = top_p
 
     async def on_submit(self, interaction: Interaction) -> None:
         """Handle the submission of the modal.
@@ -70,7 +58,7 @@ class CodeModal(Modal):
 
             if FIXPY_MODEL is None:
                 await interaction.followup.send(
-                    "*ERROR* No available model. Please contact the owner.",
+                    "**ERROR** - No available model. Please contact the owner.",
                     ephemeral=True,
                 )
                 return
@@ -78,8 +66,8 @@ class CodeModal(Modal):
             params = ClaudeModelParams(
                 model=FIXPY_MODEL,
                 max_tokens=CLAUDE_DEFAULT_MAX_TOKENS,
-                temperature=self.temperature,
-                top_p=self.top_p,
+                temperature=FIXPY_TEMPERATURE,
+                top_p=FIXPY_TOP_P,
             )
 
             message = [ChatMessage(role="user", content=code)]
@@ -109,8 +97,6 @@ class CodeModal(Modal):
 @is_not_blocked_user()  # type: ignore # noqa: F405
 async def fix_command(
     interaction: Interaction,
-    temperature: float = CLAUDE_DEFAULT_TEMPERATURE,
-    top_p: float = CLAUDE_DEFAULT_TOP_P,
 ) -> None:
     """Detect and fix bugs in Python code.
 
@@ -118,10 +104,6 @@ async def fix_command(
     ----------
     interaction : Interaction
         The interaction instance.
-    temperature : float, optional
-        The temperature parameter for Claude, by default CLAUDE_DEFAULT_TEMPERATURE.
-    top_p : float, optional
-        The top-p parameter for Claude, by default CLAUDE_DEFAULT_TOP_P.
     """
     try:
         user = interaction.user
@@ -135,7 +117,7 @@ async def fix_command(
             return
 
         # Show the modal to input code
-        modal = CodeModal(temperature=temperature, top_p=top_p)
+        modal = CodeModal()
         await interaction.response.send_modal(modal)
 
     except Exception as err:
