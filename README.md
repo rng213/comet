@@ -47,7 +47,7 @@ This application requires a `.env` file for configuration. Follow these steps:
 > [!IMPORTANT]
 > When operating on a public server, it is strongly recommended to use robust system prompts with appropriate security measures in place.
 
-Make a copy of `.prompt.yml.example` and rename it to `.prompt.yml`. Set system prompts for each feature.
+Make a copy of `.prompt.yml.sample` and rename it to `.prompt.yml`. Set system prompts for each feature.
 
 Example:
 

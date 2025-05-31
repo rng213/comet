@@ -100,8 +100,6 @@ async def _handle_claude_thread(discord_msg: DiscordMessage) -> None:
 
         async with thread.typing():
             response = await generate_anthropic_response(
-                # コマンドファイル内で定義し、ワイルドカードインポートする
-                # 実装後コメントは削除する
                 system_prompt=system_prompt_dict.get(  # type: ignore # noqa: F405
                     thread.id,
                 ),
@@ -163,10 +161,9 @@ async def on_message(user_msg: DiscordMessage) -> None:
         if not await _is_valid_message(user_msg):
             return
 
-        # Chat with claude
         if isinstance(user_msg.channel, Thread) and user_msg.channel.name.startswith(
             # mypy(name-defined): Defined in a wildcard import
-            CLAUDE_THREAD_PREFIX,  # type: ignore # noqa: F405
+            TALK_THREAD_PREFIX,  # type: ignore # noqa: F405
         ):
             await _handle_claude_thread(user_msg)
     except Exception:

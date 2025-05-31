@@ -14,3 +14,7 @@ chat_system: |
 # For `/fixpy` command
 fixpy_system: |
   You are a helpful assistant.
+
+# For `/talk ` command
+talk_system: |
+  Instructions here...

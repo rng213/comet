@@ -43,10 +43,15 @@ FIXPY_MODEL: str = os.environ["FIXPY_MODEL"]
 FIXPY_TEMPERATURE: float = float(os.environ["FIXPY_TEMPERATURE"])
 FIXPY_TOP_P: float = float(os.environ["FIXPY_TOP_P"])
 
+# '/talk' command
+TALK_MAX_TOKENS: int = int(os.environ["TALK_MAX_TOKENS"])
+TALK_TEMPERATURE: float = float(os.environ["TALK_TEMPERATURE"])
+TALK_TOP_P: float = float(os.environ["TALK_TOP_P"])
 
-def _get_model_choices(env_var: str) -> list[app_commands.Choice[int]]:
+
+def _get_model_choices(env_var: str) -> list[app_commands.Choice[str]]:
     models_str = os.environ[env_var]
-    choices: list[app_commands.Choice[int]] = []
+    choices: list[app_commands.Choice[str]] = []
     if models_str:
         for entry in models_str.split(","):
             entry_stripped = entry.strip()
@@ -55,7 +60,7 @@ def _get_model_choices(env_var: str) -> list[app_commands.Choice[int]]:
                 raise ValueError(msg)
             try:
                 name, value_str = entry_stripped.split(":")
-                value = int(value_str)
+                value: str = value_str
             except ValueError as err:
                 msg = "Invalid format in environment variable, expected 'name:value'."
                 raise ValueError(msg) from err
@@ -63,5 +68,4 @@ def _get_model_choices(env_var: str) -> list[app_commands.Choice[int]]:
     return choices
 
 
-# CLAUDE_MODELS = _get_model_choices("CLAUDE_AVAILABLE_MODELS") # noqa: ERA001
-# GPT_MODELS = _get_model_choices("GPT_AVAILABLE_MODELS") # noqa: ERA001
+TALK_MODEL = _get_model_choices("TALK_MODEL")
